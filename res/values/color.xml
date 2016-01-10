@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="list_item_title">#000000</color>
+    <color name="list_background">#FFFFFF</color>
+    <color name="list_background_pressed">#009966</color>
+    
+    
+      <color name="mywhite">#ffffff</color>
+      <color name="myblack">#444444</color>
+     <color name="my_green">#358D62</color>
+     <color name="drawer_list_background">#ffffff</color><!-- 整个抽屉背景颜色-->
+    
+    <color name="list_item_text_color">#000000</color>
+    <color name="my_black">#000000</color>
+    <color name="list_item_background">#ffffff</color><!-- list背景颜色-->
+    <color name="list_item_background_pressed">#009966</color><!-- 绿色 -->
+    
+    <color name="list_divider">#CFCFCF</color>
+    
+    <color name="counter_text_bg">#009966</color><!-- counter背景颜色  -->
+    <color name="counter_text_color">#ffffff</color><!-- counter字体颜色 白色 -->
+    
+      <color name="com_sina_weibo_sdk_loginview_text_color">#FFFFFF</color>
+          <color name="com_sina_weibo_sdk_blue">#3B5998</color>
+            <color name="bg_gray">#EDEDED</color>
+             <color name="actionbar_background">#3A3A3A</color>
+          <color name="walllist_bg">#ebebeb</color>
+    <color name="exist_wall_list">#ececec</color>
+    <color name="wall_bottom_bg">#fefefe</color>
+    <color name="message_item_textcolor">#999999</color>
+    <color name="message_item_username">#3399cc</color>
+    <color name="mytouming">#00000000</color>
+    <color name="name_blue">#3399cc</color>
+    <color name="wallname_bg">#e0e0e0</color>
+</resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/user_info"
+  android:layout_width="fill_parent"
+  android:layout_height="100dp"
+  android:orientation="vertical" >
+
+<RelativeLayout 
+  
+    android:layout_width="fill_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal" 
+   
+    >
+
+    <ImageView
+        android:id="@+id/user_image"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:src="@drawable/not_logged"
+        android:scaleType="fitCenter"
+  	    />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/user_image"
+        android:text="某某某"
+        android:layout_marginLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/abc_action_bar_title_text_size" />
+
+</RelativeLayout>
+ 
+    </LinearLayout>

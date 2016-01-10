@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content" 
+	android:orientation="horizontal"
+	android:padding="5dp">
+	<ImageView
+		android:id="@+id/scenerySpotPicture"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:src="@drawable/ic_launcher"
+		android:padding="5dp"
+		/>
+
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	    android:orientation="vertical">
+	
+	  <LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	    android:orientation="horizontal">
+
+	<TextView
+		android:id="@+id/scenerySpotName"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="兴庆公园"
+		android:textStyle="bold"
+		android:padding="5dp"/>
+	</LinearLayout>
+	
+	   <LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	    android:orientation="horizontal">
+	<TextView
+		android:id="@+id/scenerySpotLab1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="公园" 
+		android:padding="5dp"
+		/>
+	<TextView
+		android:id="@+id/scenerySpotLab2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="湖"
+		android:padding="5dp"
+		 />
+	<TextView
+		android:id="@+id/scenerySpotLab3"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="娱乐"
+		android:padding="5dp" />
+	<TextView
+		android:id="@+id/scenerySpotDistance"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="距离 100m"
+		android:layout_gravity="right"
+		android:padding="5dp" />
+	</LinearLayout>
+	
+	</LinearLayout>
+</LinearLayout>

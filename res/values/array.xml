@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item >首页</item>
+        <item >图纹豆</item>
+        <item >添加留言墙</item>
+		<item >意见反馈</item>
+		<item >设置</item>
+    </string-array>
+    
+   <!--Menu icons -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_account</item>
+        <item>@drawable/ic_wall</item>
+ 		<item>@drawable/ic_suggestion</item>
+		<item>@drawable/ic_setting</item>
+    </array>
+
+
+
+</resources>

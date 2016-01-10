@@ -1,0 +1,127 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.u4f.main.SceneryActivity"
+     android:orientation="vertical"
+      >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/xingqing" />
+
+    </LinearLayout>
+
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/bg_gray" >
+    </LinearLayout>
+    
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+         android:padding="10dp"
+        android:orientation="vertical" >
+        
+    	 <TextView
+    	     	android:id="@+id/ss_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="景点名字"
+                android:paddingBottom="5dp"
+                android:drawableLeft="@drawable/drawer_shadow"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+    	 
+    	     	 <TextView
+    	     	android:id="@+id/ss_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="景点地址"
+                android:drawableLeft="@drawable/drawer_shadow"
+                android:paddingBottom="5dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="景点信息"
+                android:drawableLeft="@drawable/drawer_shadow"
+                android:paddingBottom="5dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="景点说明介绍景点说明介绍景点说明介绍景点说明介绍景点说明介绍
+                景点说明介绍景点说明介绍景点说明介绍景点说明介绍景点说明介绍
+                景点说明介绍景点说明介绍景点说明介绍景点说明介绍景点说明介绍"
+                android:maxLines="5"
+                android:paddingBottom="5dp"
+                 />
+            
+               <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开放时间"
+                android:drawableLeft="@drawable/drawer_shadow"
+                android:paddingBottom="5dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+               
+               <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3-15日-11月15日  8:30-16:30"
+                android:maxLines="5"
+                android:paddingBottom="5dp"
+                 />
+               
+               <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="交通"
+                android:drawableLeft="@drawable/drawer_shadow"
+                android:paddingBottom="5dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+               
+                <TextView
+                android:id="@+id/ss_trans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="由火车站乘坐对福建省分行的顺丰速度恢复和分五个任务发热乎乎"
+                android:maxLines="1"
+                android:paddingBottom="5dp"
+                 />
+                
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="门票"
+                android:drawableLeft="@drawable/drawer_shadow"
+                android:paddingBottom="5dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+                
+                
+                 <TextView
+                android:id="@+id/ss_ticket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="由火车站乘坐对福建省分行的顺丰速度恢复和分五个任务发热乎乎"
+                android:maxLines="1"
+                android:paddingBottom="5dp"
+                 />
+    </LinearLayout>
+</LinearLayout>
