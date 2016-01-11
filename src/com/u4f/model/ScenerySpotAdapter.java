@@ -9,20 +9,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.u4f.main.R;
 import com.u4f.main.R.drawable;
 import com.u4f.main.R.id;
+import com.u4f.util.MyImageLoader;
 
 
 public class ScenerySpotAdapter extends ArrayAdapter<ScenerySpot> 
 {
 
+	MyImageLoader myImageloader;
 	private int resourceId;
 	public ScenerySpotAdapter(Context context, int textViewResourceId,List<ScenerySpot> objects) 
 	{
 			super(context, textViewResourceId, objects);
+			myImageloader=new MyImageLoader(context);
 			resourceId = textViewResourceId;
-			}
+	}
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
@@ -48,12 +52,27 @@ public class ScenerySpotAdapter extends ArrayAdapter<ScenerySpot>
 			view = convertView;
 			viewHolder = (ViewHolder) view.getTag(); // 重新获取ViewHolder
 		}
-			viewHolder.scenerySpotPicture.setImageResource(R.drawable.ic_launcher);
+			if(scenerySpot.getScenerySpotPicture() != null )
+			{
+				myImageloader.showImage(scenerySpot.getScenerySpotPicture(), viewHolder.scenerySpotPicture);
+
+			}
+			else
+			{
+				viewHolder.scenerySpotPicture.setImageResource(R.drawable.ic_launcher);
+
+			}
 			viewHolder.scenerySpotName.setText(scenerySpot.getScenerySpotName());
+			if(scenerySpot.getScenerySpotLab1() != null )
 			viewHolder.scenerySpotLab1.setText(scenerySpot.getScenerySpotLab1());
+			if(scenerySpot.getScenerySpotLab2() != null )
 			viewHolder.scenerySpotLab2.setText(scenerySpot.getScenerySpotLab2());
+			if(scenerySpot.getScenerySpotLab3() != null )
 			viewHolder.scenerySpotLab3.setText(scenerySpot.getScenerySpotLab3());
-			viewHolder.scenerySpotDistance.setText("距离 100m");
+			viewHolder.scenerySpotDistance.setText("距离 "+scenerySpot.getScenerySpotDistance());
+			
+		
+			
 		return view;
 	}
 class ViewHolder 

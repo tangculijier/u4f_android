@@ -1,6 +1,5 @@
 package com.u4f.model;
 
-import java.sql.Blob;
 
 
 import android.os.Parcel;
@@ -16,18 +15,19 @@ public class ScenerySpot  implements Parcelable
 	private double scenerySpotLat;
 	private double scenerySpotLong;
 	private int belongCityId;
-	private double scenerySpotTicket;
+	private String scenerySpotOpenTime;
+	private String scenerySpotTicket;
 	private String scenerySpotTrans;
 	private String scenerySpotLab1;
 	private String scenerySpotLab2;
 	private String scenerySpotLab3;
-	private Blob scenerySpotPicture;
-	private int scenerySpotDistance;
-	public int getScenerySpotDistance()
+	private String scenerySpotPicture;
+	private String scenerySpotDistance;
+	public String getScenerySpotDistance()
 	{
 		return scenerySpotDistance;
 	}
-	public void setScenerySpotDistance(int scenerySpotDistance)
+	public void setScenerySpotDistance(String scenerySpotDistance)
 	{
 		this.scenerySpotDistance = scenerySpotDistance;
 	}
@@ -79,14 +79,6 @@ public class ScenerySpot  implements Parcelable
 	{
 		this.belongCityId = belongCityId;
 	}
-	public double getScenerySpotTicket()
-	{
-		return scenerySpotTicket;
-	}
-	public void setScenerySpotTicket(double scenerySpotTicket)
-	{
-		this.scenerySpotTicket = scenerySpotTicket;
-	}
 	public String getScenerySpotTrans()
 	{
 		return scenerySpotTrans;
@@ -119,11 +111,11 @@ public class ScenerySpot  implements Parcelable
 	{
 		this.scenerySpotLab3 = scenerySpotLab3;
 	}
-	public Blob getScenerySpotPicture()
+	public String getScenerySpotPicture()
 	{
 		return scenerySpotPicture;
 	}
-	public void setScenerySpotPicture(Blob scenerySpotPicture)
+	public void setScenerySpotPicture(String scenerySpotPicture)
 	{
 		this.scenerySpotPicture = scenerySpotPicture;
 	}
@@ -154,6 +146,22 @@ public class ScenerySpot  implements Parcelable
 //				+  "]";
 //	}
 
+	public String getScenerySpotOpenTime()
+	{
+		return scenerySpotOpenTime;
+	}
+	public void setScenerySpotOpenTime(String scenerySpotOpenTime)
+	{
+		this.scenerySpotOpenTime = scenerySpotOpenTime;
+	}
+	public String getScenerySpotTicket()
+	{
+		return scenerySpotTicket;
+	}
+	public void setScenerySpotTicket(String scenerySpotTicket)
+	{
+		this.scenerySpotTicket = scenerySpotTicket;
+	}
 	/**
 	 * Describe the kinds of special objects contained in this Parcelable's
 	 * marshalled representation.
@@ -178,12 +186,14 @@ public class ScenerySpot  implements Parcelable
 		dest.writeDouble(scenerySpotLat);
 		dest.writeDouble(scenerySpotLong);
 		dest.writeInt(belongCityId);
-		dest.writeDouble(scenerySpotTicket);
+		dest.writeString(scenerySpotOpenTime);
+		dest.writeString(scenerySpotTicket);
 		dest.writeString(scenerySpotTrans);
 		dest.writeString(scenerySpotLab1);
 		dest.writeString(scenerySpotLab2);
 		dest.writeString(scenerySpotLab3);
-		dest.writeInt(scenerySpotDistance);
+		dest.writeString(scenerySpotDistance);
+		dest.writeString(scenerySpotPicture);
 	}
 
 	public static final Parcelable.Creator<ScenerySpot> CREATOR = new Creator<ScenerySpot>() {
@@ -195,12 +205,14 @@ public class ScenerySpot  implements Parcelable
 			c.scenerySpotLat = source.readDouble();
 			c.scenerySpotLong =source.readDouble();
 			c.belongCityId =source.readInt();
-			c.scenerySpotTicket = source.readDouble();
+			c.scenerySpotOpenTime = source.readString();
+			c.scenerySpotTicket = source.readString();
 			c.scenerySpotTrans = source.readString();
 			c.scenerySpotLab1 = source.readString();
 			c.scenerySpotLab2 = source.readString();
 			c.scenerySpotLab3 = source.readString();
-			c.scenerySpotDistance = source.readInt();
+			c.scenerySpotDistance = source.readString();
+			c.scenerySpotPicture = source.readString();
 			return c;
 		}
 

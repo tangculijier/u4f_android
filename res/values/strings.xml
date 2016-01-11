@@ -11,5 +11,6 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="title_activity_scenery">SceneryActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_scenery_spot_map">ScenerySpotMapActivity</string>
 
 </resources>

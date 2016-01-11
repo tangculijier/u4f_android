@@ -1,0 +1,96 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.u4f.main.ScenerySpotMapActivity" 
+    android:orientation="vertical">
+
+<LinearLayout     
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:background="@color/bg_gray"
+        >
+
+    <RadioGroup 
+       android:layout_width="match_parent"
+	   android:layout_height="wrap_content"
+	   android:orientation="horizontal">
+    <RadioButton
+        android:id="@+id/radioButton_wc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_weight="1"
+        android:text="厕所" />
+     <RadioButton
+        android:id="@+id/radioButton_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_weight="1"
+        android:text="美食" />
+      <RadioButton
+        android:id="@+id/radioButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_weight="1"
+
+        android:text="购物" />
+        
+    
+    </RadioGroup>
+     </LinearLayout>
+    
+        
+ 
+     <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true" />
+     
+     
+         <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dip"
+        android:background="#D000"
+        android:minWidth="100dip"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:padding="2dp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="25dp"
+          android:visibility="gone"
+        android:layout_marginTop="10dip" />
+    
+    
+    <LinearLayout     
+	    android:layout_width="match_parent"
+	    android:layout_height="50dp"
+	    android:layout_alignParentBottom="true"
+	    android:background="@color/bg_gray"
+        >
+
+        <TextView
+            android:id="@+id/ss_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium Text"
+            android:padding="5dp"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+     </LinearLayout>
+        
+    
+     
+</LinearLayout>

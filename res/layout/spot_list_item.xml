@@ -8,6 +8,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
 		android:src="@drawable/ic_launcher"
+		android:scaleType="centerCrop"
 		android:padding="5dp"
 		/>
 
@@ -30,7 +31,7 @@
 		android:padding="5dp"/>
 	</LinearLayout>
 	
-	   <LinearLayout
+	   <RelativeLayout
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content" 
 	    android:orientation="horizontal">
@@ -46,6 +47,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="湖"
+		android:layout_toRightOf="@+id/scenerySpotLab1"
 		android:padding="5dp"
 		 />
 	<TextView
@@ -53,15 +55,16 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="娱乐"
+			android:layout_toRightOf="@+id/scenerySpotLab2"
 		android:padding="5dp" />
 	<TextView
 		android:id="@+id/scenerySpotDistance"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="距离 100m"
-		android:layout_gravity="right"
+		android:layout_alignParentRight="true"
 		android:padding="5dp" />
-	</LinearLayout>
+	</RelativeLayout>
 	
 	</LinearLayout>
 </LinearLayout>

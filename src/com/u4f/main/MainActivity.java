@@ -38,6 +38,9 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.Poi;
 import com.baidu.location.service.LocationService;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.u4f.model.ScenerySpot;
 import com.u4f.model.ScenerySpotAdapter;
 import com.u4f.navigationdrawertest.adapter.DrawerItem;
@@ -47,8 +50,9 @@ import com.u4f.navigationdrawertest.fragment.HomeFragment;
 public class MainActivity extends ActionBarActivity 
 {
 
-	private ListView scenerySpotListView;
+	private PullToRefreshListView scenerySpotListView;
 	private List<ScenerySpot> scenerySpotList;
+	ScenerySpotAdapter scenerySpotadapter ;
 
 	//抽屉的一些定义
 	private String[] mMenuTitles;//标题
@@ -82,11 +86,41 @@ public class MainActivity extends ActionBarActivity
 		//getActionBar().setDisplayHomeAsUpEnabled(true);//要箭头
 		//getActionBar().setDisplayShowHomeEnabled(false);//不要图标 
 		findView();
+		
+		//scenerySpotList = new ArrayList<ScenerySpot>();
+		scenerySpotListView = (PullToRefreshListView) findViewById(R.id.scenerySpotListView);
+
+		scenerySpotListView.setOnItemClickListener(new OnItemClickListener()
+		{
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id)
+			{
+				ScenerySpot scenerySpot = scenerySpotList.get(position-1);
+				Intent gotoScenerySpotActivityIntent = new Intent(MainActivity.this,ScenerySpotInfoActivity.class);
+				gotoScenerySpotActivityIntent.putExtra("ss", scenerySpot);
+				startActivity(gotoScenerySpotActivityIntent);
+				
+			}
+		});
+		
 		new getNearSSAsync().execute("34.2567","108.9897");
 		
+		
+		scenerySpotListView.setOnRefreshListener(new OnRefreshListener<ListView>() 
+		{
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView)
+			{
+				Log.d("huang", "onRefresh");
+				new getNearSSAsync().execute("34.2567","108.9897");
+				
+			}
+		});
+		
+
 
 	
-		Log.d("huang", "开始定位");
+		
 	}
 
 	@Override
@@ -322,7 +356,7 @@ public class MainActivity extends ActionBarActivity
 			  List<ScenerySpot> cc=  com.alibaba.fastjson.JSON.parseArray(response.body().string(), ScenerySpot.class);
 			  if(cc!=null)
 			  {
-					scenerySpotList=cc;
+					scenerySpotList.addAll(cc);
 
 			  }
 				return scenerySpotList;
@@ -338,26 +372,15 @@ public class MainActivity extends ActionBarActivity
 		protected void onPostExecute(List<ScenerySpot> result)
 		{
 		
-			if(result != null & result.size() >= 0)
+			if(result != null & result.size() > 0)
 			{
-				Log.d("huang", result.size()+"=size");
-				ScenerySpotAdapter adapter = new ScenerySpotAdapter(MainActivity.this,
-						R.layout.spot_list_item, scenerySpotList);
-				ListView scenerySpotListView = (ListView) findViewById(R.id.scenerySpotListView);
-				scenerySpotListView.setAdapter(adapter);
-				scenerySpotListView.setOnItemClickListener(new OnItemClickListener()
-				{
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id)
-					{
-						ScenerySpot scenerySpot = scenerySpotList.get(position);
-						Intent gotoScenerySpotActivityIntent = new Intent(MainActivity.this,SceneryActivity.class);
-						gotoScenerySpotActivityIntent.putExtra("ss", scenerySpot);
-						startActivity(gotoScenerySpotActivityIntent);
-						
-					}
-				});
+				Log.d("huang", result.size()+"=size"+result.get(0).getScenerySpotName());
+				scenerySpotadapter = new ScenerySpotAdapter(MainActivity.this,R.layout.spot_list_item, scenerySpotList);
+				scenerySpotListView.setAdapter(scenerySpotadapter);
+				scenerySpotadapter.notifyDataSetChanged();
+				scenerySpotListView.onRefreshComplete();
 			}
+			
 			super.onPostExecute(result);
 		}
 		
