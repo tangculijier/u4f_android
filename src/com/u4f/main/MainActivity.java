@@ -345,11 +345,15 @@ public class MainActivity extends ActionBarActivity
 		{
 			String actionuri="GetAroundServlet?latitude="+params[0]+"&longtitude="+params[1]; 
 			Log.d("huang", "get actionuri"+actionuri);
-			List<ScenerySpot> cc = com.alibaba.fastjson.JSON.parseArray(MyNetWorkUtil.get(actionuri), ScenerySpot.class);
-			if(cc!=null)
+			String result = MyNetWorkUtil.get(actionuri);
+			if(!TextUtils.isEmpty(result))
 			{
-				scenerySpotList.addAll(cc);
-
+				List<ScenerySpot> cc = com.alibaba.fastjson.JSON.parseArray(result, ScenerySpot.class);
+				if(cc!=null)
+				{
+					scenerySpotList.addAll(cc);
+	
+				}
 			}
 			return scenerySpotList;
 		}

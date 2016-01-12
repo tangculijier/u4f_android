@@ -9,7 +9,7 @@ public class User
 	private String password;
 	private int level; //用户级别
 	private int score;// 用户积分
-	private String userAvatar; //用户头像
+	private String userAvatarURL; //用户头像
 	public int getUserId()
 	{
 		return userId;
@@ -52,11 +52,11 @@ public class User
 	}
 	public String getUserAvatar()
 	{
-		return userAvatar;
+		return userAvatarURL;
 	}
 	public void setUserAvatar(String userAvatar)
 	{
-		this.userAvatar = userAvatar;
+		this.userAvatarURL = userAvatar;
 	}
 	
 	

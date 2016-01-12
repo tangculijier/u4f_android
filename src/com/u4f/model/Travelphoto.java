@@ -6,7 +6,7 @@ public class Travelphoto
 
 	private int travelPhotoId;
 	private int travelNoteId;
-	private String image;
+	private String imageURL;
 	public int getTravelPhotoId()
 	{
 		return travelPhotoId;
@@ -25,11 +25,11 @@ public class Travelphoto
 	}
 	public String getImage()
 	{
-		return image;
+		return imageURL;
 	}
 	public void setImage(String image)
 	{
-		this.image = image;
+		this.imageURL = image;
 	}
 	
 	

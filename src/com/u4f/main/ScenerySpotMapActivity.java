@@ -2,14 +2,24 @@ package com.u4f.main;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -18,15 +28,22 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.model.LatLng;
+import com.ssfxz.InfoView.FacilitysWindow;
+import com.u4f.model.Facilitys;
 import com.u4f.model.ScenerySpot;
+import com.u4f.model.TravelNote;
+import com.u4f.util.MyNetWorkUtil;
 
 public class ScenerySpotMapActivity extends Activity
 {
@@ -35,10 +52,11 @@ public class ScenerySpotMapActivity extends Activity
 	public MyLocationListenner myListener = new MyLocationListenner();
 	private LocationMode mCurrentMode;
 	BitmapDescriptor mCurrentMarker;
-
+	private InfoWindow mInfoWindow;
 	MapView mMapView;
 	BaiduMap mBaiduMap;
-
+	int FACILITYWinOffSET=-70;
+	
 	// UI相关
 	Button requestLocButton;
 	boolean isFirstLoc = true;// 是否首次定位
@@ -49,10 +67,13 @@ public class ScenerySpotMapActivity extends Activity
 	private Marker scenerySpotMarker;
 	LatLng scenerySpotLatLng;
 	ScenerySpot scenerySpot;
-	
+	List<Facilitys> facilityList;
 	
 	TextView scenerySpotNameTextView;
-	
+	RadioGroup radioGroup;
+	RadioButton radio_wc_Button;
+	RadioButton radio_food_Button;
+	RadioButton radio_shopping_Button;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -66,8 +87,41 @@ public class ScenerySpotMapActivity extends Activity
 		
 		scenerySpotNameTextView = (TextView) findViewById(R.id.ss_name_text_view);
 		scenerySpotNameTextView.setText(scenerySpot.getScenerySpotName());
-		
 		requestLocButton = (Button) findViewById(R.id.button1);
+		radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+		radio_wc_Button= (RadioButton) findViewById(R.id.radioButton_wc);
+		radio_food_Button= (RadioButton) findViewById(R.id.radioButton_food);
+		radio_shopping_Button= (RadioButton) findViewById(R.id.radioButton_shopping);
+		
+		
+		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener()
+		{
+			
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId)
+			{
+				String type = "1";
+			    RadioButton rb = (RadioButton)findViewById(checkedId);
+				String check =rb.getText().toString();
+			    if(TextUtils.equals(check,"厕所"))
+			    {
+			    	 type = "1";
+			    }
+			    else if(TextUtils.equals(check,"美食"))
+			    {
+			    	 type = "2";
+			    }
+			    else if(TextUtils.equals(check,"购物"))
+			    {
+			    	type = "3";
+			    }
+			    new getSpotFacilityAsync().execute(scenerySpot.getScenerySpotId()+"",type);
+			    //根据参数进行数据获取
+				Toast.makeText(ScenerySpotMapActivity.this,"id="+checkedId+" "+rb.getText().toString(),Toast.LENGTH_SHORT).show();
+
+			}
+		});
+		
 		mCurrentMode = LocationMode.NORMAL;
 		requestLocButton.setText("普通");
 		OnClickListener btnClickListener = new OnClickListener()
@@ -102,6 +156,34 @@ public class ScenerySpotMapActivity extends Activity
 		requestLocButton.setOnClickListener(btnClickListener);
 
 		initBaiduMap();
+		
+		mBaiduMap.setOnMarkerClickListener(new OnMarkerClickListener()
+		{
+			@Override
+			public boolean onMarkerClick(Marker arg0) {
+				LatLng latLng = arg0.getPosition();
+				if(arg0.getExtraInfo().getParcelable("facilitys") instanceof Facilitys)
+				{
+					//LogUtil.d("huang","arg0.getExtraInfo().getParcelable(content) instanceof Content");
+					final Facilitys f = arg0.getExtraInfo().getParcelable("facilitys");
+					FacilitysWindow messageInfoWindow=new FacilitysWindow(getApplicationContext(),f.getFacilityName());
+					InfoWindow.OnInfoWindowClickListener listener = new InfoWindow.OnInfoWindowClickListener() {
+						public void onInfoWindowClick()
+						{
+							Toast.makeText(ScenerySpotMapActivity.this,"listener~",Toast.LENGTH_SHORT).show();
+
+						}
+					};
+
+					mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(messageInfoWindow), latLng, FACILITYWinOffSET, listener);
+
+				}
+				
+				
+
+				mBaiduMap.showInfoWindow(mInfoWindow);
+				return true;
+			}});
 	}
 
 	private void initBaiduMap()
@@ -171,6 +253,61 @@ public class ScenerySpotMapActivity extends Activity
 		}
 	}
 
+	class getSpotFacilityAsync extends AsyncTask<String, Boolean, List<Facilitys>>
+	{
+		@Override
+		protected void onPreExecute()
+		{
+			facilityList = new ArrayList<Facilitys>();
+			super.onPreExecute();
+		}
+
+		@Override
+		protected List<Facilitys> doInBackground(String... params)
+		{
+			String actionuri="?scenerySpotId="+params[0]+"&type="+params[1]; 
+			Log.d("huang", "get actionuri"+actionuri);
+			String result = MyNetWorkUtil.get(actionuri);
+			if(!TextUtils.isEmpty(result))
+			{
+				List<Facilitys> cc =  com.alibaba.fastjson.JSON.parseArray(result, Facilitys.class);
+				if(cc!=null)
+				{
+					facilityList.clear();
+					facilityList.addAll(cc);
+					publishProgress(true);
+				}
+			}
+			return facilityList;
+		}
+		
+		@Override
+		protected void onProgressUpdate(Boolean... values)
+		{
+			if(values[0] == true)
+			{
+				Toast.makeText(getApplicationContext(), "附近信息已更新", Toast.LENGTH_SHORT).show();
+
+			}
+			super.onProgressUpdate(values);
+		}
+		@Override
+		protected void onPostExecute(List<Facilitys> result)
+		{
+			OverlayOptions option = null;	
+			for (Facilitys f : result)
+			{
+				LatLng point = new LatLng(f.getFacilityLati(), f.getFacilityLng());
+				//构建Marker图标
+				Bundle bundle = new Bundle();
+				bundle.putParcelable("facilitys", f);
+				option = new MarkerOptions().position(point).draggable(true).icon(mCurrentMarker).extraInfo(bundle);
+				mBaiduMap.addOverlay(option);
+			}
+			super.onPostExecute(result);
+		}
+		
+	}
 	@Override
 	protected void onPause()
 	{

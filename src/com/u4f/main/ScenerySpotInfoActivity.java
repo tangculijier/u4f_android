@@ -14,11 +14,13 @@ import com.u4f.model.TravelNote;
 import com.u4f.model.TravelNoteAdapter;
 import com.u4f.util.MyImageLoader;
 import com.u4f.util.MyNetWorkUtil;
+import com.u4f.widget.NoScrollListview;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,8 +36,10 @@ public class ScenerySpotInfoActivity extends Activity
 
 	ScenerySpot scenerySpot;
 	List<TravelNote> travelNoteList;
-	ListView travelNoteListView ;
+	
+	NoScrollListview travelNoteListView ;
 	TravelNoteAdapter travelNoteAdapter;
+	
 	TextView scenerySpotNameTextView;
 	TextView scenerySpotNameAddressTextView;
 	ImageView scenerySpotAddressImageView;
@@ -124,7 +128,7 @@ public class ScenerySpotInfoActivity extends Activity
 			});
 		}
 		
-		//new getTravelNotesAsync().execute(scenerySpot.getScenerySpotId()+"");
+		new getTravelNotesAsync().execute(scenerySpot.getScenerySpotId()+"");
 	}
 	
 	private void findViewById()
@@ -138,9 +142,11 @@ public class ScenerySpotInfoActivity extends Activity
 		scenerySpotTransTitleTextView = (TextView)findViewById(R.id.ss_trans_title);
 		scenerySpotNameTicketTextView = (TextView)findViewById(R.id.ss_ticket);
 		scenerySpotNameTicketTitleTextView = (TextView)findViewById(R.id.ss_ticket_title);
-		travelNoteListView = (ListView)findViewById(R.id.ss_note_listview );
+
 		travleNoteSizeTextView = (TextView)findViewById(R.id.ss_note_size);
 		scenerySpotPitcureImageView = (ImageView)findViewById(R.id.ss_picture_imageview);
+		
+		travelNoteListView = (NoScrollListview)findViewById(R.id.ss_note_listview );
 		
 	}
 
@@ -151,6 +157,8 @@ public class ScenerySpotInfoActivity extends Activity
 		protected void onPreExecute()
 		{
 			travelNoteList = new ArrayList<TravelNote>();
+			travelNoteAdapter = new TravelNoteAdapter(ScenerySpotInfoActivity.this,R.layout.travelnote_list_item, travelNoteList);
+			travelNoteListView.setAdapter(travelNoteAdapter);
 			super.onPreExecute();
 		}
 		@Override
@@ -158,12 +166,18 @@ public class ScenerySpotInfoActivity extends Activity
 		{
 			String actionuri="GetTravelNote?scenerySpotId="+params[0]; 
 			Log.d("huang", "get actionuri"+actionuri);
-			List<TravelNote> cc=  com.alibaba.fastjson.JSON.parseArray(MyNetWorkUtil.get(actionuri), TravelNote.class);
-			if(cc!=null)
+			String result = MyNetWorkUtil.get(actionuri);
+			if(!TextUtils.isEmpty(result))
 			{
-				travelNoteList.addAll(cc);
-	
+				List<TravelNote> cc =  com.alibaba.fastjson.JSON.parseArray(result, TravelNote.class);
+				if(cc!=null)
+				{
+					travelNoteList.clear();
+					travelNoteList.addAll(cc);
+		
+				}
 			}
+			
 			return travelNoteList;
 		}
 		
@@ -175,10 +189,9 @@ public class ScenerySpotInfoActivity extends Activity
 			{
 				Log.d("huang", result.size()+"=size"+result.get(0).getTravelNoteTitle());
 				travleNoteSizeTextView.setVisibility(View.VISIBLE);
-				travleNoteSizeTextView.setText("ÂÃÓÎ¹¥ÂÔ" + result.size()+ "Æª");
+				travleNoteSizeTextView.setText("ÂÃÓÎ¹¥ÂÔ " + result.size()+ "Æª");
 				
-				travelNoteAdapter = new TravelNoteAdapter(ScenerySpotInfoActivity.this,R.layout.travelnote_list_item, travelNoteList);
-				travelNoteListView.setAdapter(travelNoteAdapter);
+				
 				travelNoteAdapter.notifyDataSetChanged();
 			}
 			else

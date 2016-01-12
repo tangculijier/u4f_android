@@ -10,6 +10,7 @@
     android:layout_height="0dp"
     android:layout_weight="1"
     android:scrollbars="vertical"
+    android:fillViewport="true"
 	>
     
 <LinearLayout 
@@ -156,7 +157,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                  />
     
-      <ListView 
+      <com.u4f.widget.NoScrollListview 
     	android:id="@+id/ss_note_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 

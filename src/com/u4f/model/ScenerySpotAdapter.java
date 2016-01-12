@@ -31,26 +31,24 @@ public class ScenerySpotAdapter extends ArrayAdapter<ScenerySpot>
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
 		ScenerySpot scenerySpot = getItem(position);
-		View view;
 		ViewHolder viewHolder;
 		if (convertView == null) 
 		{
-			view = LayoutInflater.from(getContext()).inflate(resourceId, null);
+			convertView = LayoutInflater.from(getContext()).inflate(resourceId, null);
 			viewHolder = new ViewHolder();
-			viewHolder.scenerySpotPicture = (ImageView) view.findViewById(R.id.scenerySpotPicture);
-			viewHolder.scenerySpotName = (TextView) view.findViewById(R.id.scenerySpotName);
+			viewHolder.scenerySpotPicture = (ImageView) convertView.findViewById(R.id.scenerySpotPicture);
+			viewHolder.scenerySpotName = (TextView) convertView.findViewById(R.id.scenerySpotName);
 
-			viewHolder.scenerySpotLab1 = (TextView) view.findViewById(R.id.scenerySpotLab1);
-			viewHolder.scenerySpotLab2 = (TextView) view.findViewById(R.id.scenerySpotLab2);
-			viewHolder.scenerySpotLab3 = (TextView) view.findViewById(R.id.scenerySpotLab3);
-			viewHolder.scenerySpotDistance = (TextView) view.findViewById(R.id.scenerySpotDistance);
+			viewHolder.scenerySpotLab1 = (TextView) convertView.findViewById(R.id.scenerySpotLab1);
+			viewHolder.scenerySpotLab2 = (TextView) convertView.findViewById(R.id.scenerySpotLab2);
+			viewHolder.scenerySpotLab3 = (TextView) convertView.findViewById(R.id.scenerySpotLab3);
+			viewHolder.scenerySpotDistance = (TextView) convertView.findViewById(R.id.scenerySpotDistance);
 
-			view.setTag(viewHolder); // 将ViewHolder存储在View中
+			convertView.setTag(viewHolder); // 将ViewHolder存储在View中
 		} 
 		else
 		{
-			view = convertView;
-			viewHolder = (ViewHolder) view.getTag(); // 重新获取ViewHolder
+			viewHolder = (ViewHolder) convertView.getTag(); // 重新获取ViewHolder
 		}
 			if(scenerySpot.getScenerySpotPicture() != null )
 			{
@@ -73,7 +71,7 @@ public class ScenerySpotAdapter extends ArrayAdapter<ScenerySpot>
 			
 		
 			
-		return view;
+		return convertView;
 	}
 class ViewHolder 
 {

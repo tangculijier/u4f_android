@@ -62,9 +62,11 @@
 		    android:layout_height="wrap_content"
 		    android:maxLines="8"
 		    android:text="在不通过的城门下面都可以购买menial"
+		    android:ellipsize="end"
 		    android:paddingBottom="5dp"
 		     />
 	<LinearLayout
+	    android:id="@+id/travel_note_picture_linearLayout"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content" 
 		android:paddingBottom="5dp"
@@ -73,10 +75,12 @@
 
 		<ImageView
 		    android:id="@+id/travel_picture1"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:src="@drawable/ic_launcher"
-		    android:padding="5dp"
+		    android:layout_width="100dp"
+		    android:layout_height="60dp"
+		    android:src="@drawable/xingqing"
+		    android:scaleType="centerCrop"
+		    android:padding="5dp"  
+		    android:visibility="gone"
 		     />
 		
 		<ImageView
@@ -84,7 +88,8 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:src="@drawable/ic_launcher" 
-		        android:padding="5dp"
+		    android:padding="5dp"
+		    android:visibility="gone"
 		    />
 			
 		<ImageView
@@ -93,6 +98,7 @@
 		    android:layout_height="wrap_content"
 		    android:src="@drawable/ic_launcher" 
 		    android:padding="5dp"
+		      android:visibility="gone"
 		    />
 	
 	</LinearLayout>>
