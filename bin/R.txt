@@ -366,7 +366,6 @@ int id homeAsUp 0x7f050011
 int id icon 0x7f050036
 int id ifRoom 0x7f050016
 int id image 0x7f050033
-int id imageView1 0x7f05004d
 int id left_drawer 0x7f05004c
 int id listMode 0x7f05000d
 int id list_item 0x7f050035
@@ -421,6 +420,7 @@ int id ss_note_listview 0x7f050058
 int id ss_note_size 0x7f050057
 int id ss_opentime 0x7f050052
 int id ss_opentime_title 0x7f050051
+int id ss_picture_imageview 0x7f05004d
 int id ss_ticket 0x7f050056
 int id ss_ticket_title 0x7f050055
 int id ss_trans 0x7f050054

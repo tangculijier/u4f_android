@@ -1342,7 +1342,6 @@ containing a value of this type.
         public static final int icon=0x7f050036;
         public static final int ifRoom=0x7f050016;
         public static final int image=0x7f050033;
-        public static final int imageView1=0x7f05004d;
         public static final int left_drawer=0x7f05004c;
         public static final int listMode=0x7f05000d;
         public static final int list_item=0x7f050035;
@@ -1397,6 +1396,7 @@ containing a value of this type.
         public static final int ss_note_size=0x7f050057;
         public static final int ss_opentime=0x7f050052;
         public static final int ss_opentime_title=0x7f050051;
+        public static final int ss_picture_imageview=0x7f05004d;
         public static final int ss_ticket=0x7f050056;
         public static final int ss_ticket_title=0x7f050055;
         public static final int ss_trans=0x7f050054;

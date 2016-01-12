@@ -54,7 +54,7 @@ public class ScenerySpotAdapter extends ArrayAdapter<ScenerySpot>
 		}
 			if(scenerySpot.getScenerySpotPicture() != null )
 			{
-				myImageloader.showImage(scenerySpot.getScenerySpotPicture(), viewHolder.scenerySpotPicture);
+				myImageloader.showImage("http://10.0.2.2:8080/u4f/"+scenerySpot.getScenerySpotPicture(), viewHolder.scenerySpotPicture);
 
 			}
 			else

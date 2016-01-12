@@ -46,6 +46,7 @@ import com.u4f.model.ScenerySpotAdapter;
 import com.u4f.navigationdrawertest.adapter.DrawerItem;
 import com.u4f.navigationdrawertest.adapter.DrawerListAdapter;
 import com.u4f.navigationdrawertest.fragment.HomeFragment;
+import com.u4f.util.MyNetWorkUtil;
 
 public class MainActivity extends ActionBarActivity 
 {
@@ -66,10 +67,6 @@ public class MainActivity extends ActionBarActivity
 
 
 	public static final MediaType JSON= MediaType.parse("application/json; charset=utf-8");
-	/**
-	 * 网络请求
-	 */
-	OkHttpClient client;
 	/**
 	 * Baidu 定位服务
 	 */
@@ -103,7 +100,7 @@ public class MainActivity extends ActionBarActivity
 			}
 		});
 		
-		new getNearSSAsync().execute("34.2567","108.9897");
+		new getNearSSAsync().execute("34.2565","108.9895");
 		
 		
 		scenerySpotListView.setOnRefreshListener(new OnRefreshListener<ListView>() 
@@ -112,7 +109,7 @@ public class MainActivity extends ActionBarActivity
 			public void onRefresh(PullToRefreshBase<ListView> refreshView)
 			{
 				Log.d("huang", "onRefresh");
-				new getNearSSAsync().execute("34.2567","108.9897");
+				new getNearSSAsync().execute("34.2565","108.9895");
 				
 			}
 		});
@@ -341,29 +338,18 @@ public class MainActivity extends ActionBarActivity
 		protected void onPreExecute()
 		{
 			scenerySpotList = new ArrayList<ScenerySpot>();
-			client = new OkHttpClient();
 			super.onPreExecute();
 		}
 		@Override
 		protected List<ScenerySpot> doInBackground(String... params)
 		{
-			String actionuri="http://10.0.2.2:8080/u4f/GetAroundServlet?latitude="+params[0]+"&longtitude="+params[1]; 
+			String actionuri="GetAroundServlet?latitude="+params[0]+"&longtitude="+params[1]; 
 			Log.d("huang", "get actionuri"+actionuri);
-			try
+			List<ScenerySpot> cc = com.alibaba.fastjson.JSON.parseArray(MyNetWorkUtil.get(actionuri), ScenerySpot.class);
+			if(cc!=null)
 			{
-			  Request request = new Request.Builder().url(actionuri).build();
-			  Response response = client.newCall(request).execute();
-			  List<ScenerySpot> cc=  com.alibaba.fastjson.JSON.parseArray(response.body().string(), ScenerySpot.class);
-			  if(cc!=null)
-			  {
-					scenerySpotList.addAll(cc);
+				scenerySpotList.addAll(cc);
 
-			  }
-				return scenerySpotList;
-
-			} catch (IOException e)                                                                                                                                    
-			{
-				e.printStackTrace();
 			}
 			return scenerySpotList;
 		}

@@ -12,6 +12,8 @@ import com.u4f.model.ScenerySpot;
 import com.u4f.model.ScenerySpotAdapter;
 import com.u4f.model.TravelNote;
 import com.u4f.model.TravelNoteAdapter;
+import com.u4f.util.MyImageLoader;
+import com.u4f.util.MyNetWorkUtil;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -34,11 +36,6 @@ public class ScenerySpotInfoActivity extends Activity
 	List<TravelNote> travelNoteList;
 	ListView travelNoteListView ;
 	TravelNoteAdapter travelNoteAdapter;
-	/**
-	 * 网络请求
-	 */
-	OkHttpClient client;
-	
 	TextView scenerySpotNameTextView;
 	TextView scenerySpotNameAddressTextView;
 	ImageView scenerySpotAddressImageView;
@@ -49,7 +46,9 @@ public class ScenerySpotInfoActivity extends Activity
 	TextView scenerySpotNameTicketTextView;
 	TextView scenerySpotNameTicketTitleTextView;
 	TextView travleNoteSizeTextView;
+	ImageView scenerySpotPitcureImageView;
 	
+	MyImageLoader  myImageloader;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -60,10 +59,13 @@ public class ScenerySpotInfoActivity extends Activity
 		getActionBar().setDisplayShowHomeEnabled(false);//不要图标 
 		getActionBar().setTitle("");
 		scenerySpot = getIntent().getParcelableExtra("ss");
+		myImageloader = new  MyImageLoader(this);
 		if(scenerySpot != null)
 		{
 			
 			Log.d("huang", "scenerySpot="+scenerySpot.toString());
+			
+			myImageloader.showImage("http://10.0.2.2:8080/u4f/"+scenerySpot.getScenerySpotPicture(), scenerySpotPitcureImageView);
 			
 			scenerySpotNameTextView.setText(scenerySpot.getScenerySpotName());
 			scenerySpotNameAddressTextView.setText(scenerySpot.getScenerySpotAddress());
@@ -138,6 +140,7 @@ public class ScenerySpotInfoActivity extends Activity
 		scenerySpotNameTicketTitleTextView = (TextView)findViewById(R.id.ss_ticket_title);
 		travelNoteListView = (ListView)findViewById(R.id.ss_note_listview );
 		travleNoteSizeTextView = (TextView)findViewById(R.id.ss_note_size);
+		scenerySpotPitcureImageView = (ImageView)findViewById(R.id.ss_picture_imageview);
 		
 	}
 
@@ -148,29 +151,18 @@ public class ScenerySpotInfoActivity extends Activity
 		protected void onPreExecute()
 		{
 			travelNoteList = new ArrayList<TravelNote>();
-			client = new OkHttpClient();
 			super.onPreExecute();
 		}
 		@Override
 		protected List<TravelNote> doInBackground(String... params)
 		{
-			String actionuri="http://10.0.2.2:8080/u4f/GetTravelNote?scenerySpotId="+params[0]; 
+			String actionuri="GetTravelNote?scenerySpotId="+params[0]; 
 			Log.d("huang", "get actionuri"+actionuri);
-			try
+			List<TravelNote> cc=  com.alibaba.fastjson.JSON.parseArray(MyNetWorkUtil.get(actionuri), TravelNote.class);
+			if(cc!=null)
 			{
-			  Request request = new Request.Builder().url(actionuri).build();
-			  Response response = client.newCall(request).execute();
-			  List<TravelNote> cc=  com.alibaba.fastjson.JSON.parseArray(response.body().string(), TravelNote.class);
-			  if(cc!=null)
-			  {
-				  travelNoteList.addAll(cc);
-
-			  }
-				return travelNoteList;
-
-			} catch (IOException e)                                                                                                                                    
-			{
-				e.printStackTrace();
+				travelNoteList.addAll(cc);
+	
 			}
 			return travelNoteList;
 		}
