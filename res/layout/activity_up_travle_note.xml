@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.u4f.main.UpTravleNoteActivity" >
+
+       <EditText
+        android:id="@+id/travel_note_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="攻略标题"
+		android:minLines="1" 
+		android:padding="5dp"
+         />
+         
+    <EditText
+        android:id="@+id/travel_note_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="风光、当地特色、公共服务、拍照地点推荐"
+        android:layout_below="@+id/travel_note_title"
+        android:inputType="textMultiLine"
+		android:minLines="6" 
+		android:padding="5dp"
+         >
+
+        <requestFocus />
+    </EditText>
+
+      <Button
+        android:id="@+id/travel_note_send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/travel_note_content"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:text="发布" />
+
+    <ImageView
+        android:id="@+id/add_picture_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/travel_note_send"
+        android:padding="5dp"
+        android:src="@drawable/add" />
+    
+ <ImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/add_picture_button"
+        android:scaleType="centerCrop"
+        android:padding="5dp"
+        android:visibility="gone"
+        />
+ 
+ 	<LinearLayout
+	    android:id="@+id/travel_add_picture_linearLayout"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" 
+		android:paddingBottom="5dp"
+		android:layout_alignParentLeft="true"
+		android:layout_below="@+id/add_picture_button"
+		android:orientation="horizontal"
+		android:padding="5dp"
+	    />
+    
+  
+</RelativeLayout>

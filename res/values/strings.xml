@@ -10,7 +10,7 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="title_activity_scenery">SceneryActivity</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_scenery_spot_map">ScenerySpotMapActivity</string>
+    <string name="title_activity_scenery_spot_map">景点信息</string>
+    <string name="title_activity_up_travle_note">上传攻略</string>
 
 </resources>

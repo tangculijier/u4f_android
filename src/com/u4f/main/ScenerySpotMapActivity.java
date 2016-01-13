@@ -51,7 +51,11 @@ public class ScenerySpotMapActivity extends Activity
 	LocationClient mLocClient;
 	public MyLocationListenner myListener = new MyLocationListenner();
 	private LocationMode mCurrentMode;
-	BitmapDescriptor mCurrentMarker;
+	BitmapDescriptor mCurrentMarker_shopping = BitmapDescriptorFactory.fromResource(R.drawable.icon_gcoding1);
+	BitmapDescriptor mCurrentMarker_food = BitmapDescriptorFactory.fromResource(R.drawable.icon_gcoding2);
+	BitmapDescriptor mCurrentMarker_wc = BitmapDescriptorFactory.fromResource(R.drawable.icon_gcoding3);
+	BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory.fromResource(R.drawable.icon_gcoding);
+
 	private InfoWindow mInfoWindow;
 	MapView mMapView;
 	BaiduMap mBaiduMap;
@@ -265,7 +269,7 @@ public class ScenerySpotMapActivity extends Activity
 		@Override
 		protected List<Facilitys> doInBackground(String... params)
 		{
-			String actionuri="?scenerySpotId="+params[0]+"&type="+params[1]; 
+			String actionuri="FindFacility?scenerySpotId="+params[0]+"&facilityType="+params[1]; 
 			Log.d("huang", "get actionuri"+actionuri);
 			String result = MyNetWorkUtil.get(actionuri);
 			if(!TextUtils.isEmpty(result))
@@ -295,14 +299,37 @@ public class ScenerySpotMapActivity extends Activity
 		protected void onPostExecute(List<Facilitys> result)
 		{
 			OverlayOptions option = null;	
-			for (Facilitys f : result)
+			if(result != null && result.size() != 0)
 			{
-				LatLng point = new LatLng(f.getFacilityLati(), f.getFacilityLng());
-				//构建Marker图标
-				Bundle bundle = new Bundle();
-				bundle.putParcelable("facilitys", f);
-				option = new MarkerOptions().position(point).draggable(true).icon(mCurrentMarker).extraInfo(bundle);
-				mBaiduMap.addOverlay(option);
+				mBaiduMap.clear();
+				LatLng ll = new LatLng(scenerySpot.getScenerySpotLat(),
+						scenerySpot.getScenerySpotLong());
+				MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(ll, maxZoomLevel);
+
+				mBaiduMap.animateMapStatus(u);
+				for (Facilitys f : result)
+				{
+					LatLng point = new LatLng(f.getFacilityLati(), f.getFacilityLng());
+					//构建Marker图标
+					Bundle bundle = new Bundle();
+					bundle.putParcelable("facilitys", f);
+					if(TextUtils.equals("1", f.getFacilityType()))
+					{
+						option = new MarkerOptions().position(point).draggable(true).icon(mCurrentMarker_wc).extraInfo(bundle);
+
+					}
+					else if(TextUtils.equals("2", f.getFacilityType()))
+					{
+						option = new MarkerOptions().position(point).draggable(true).icon(mCurrentMarker_food).extraInfo(bundle);
+
+					}
+					else if(TextUtils.equals("3", f.getFacilityType()))
+					{
+						option = new MarkerOptions().position(point).draggable(true).icon(mCurrentMarker_shopping).extraInfo(bundle);
+
+					}
+					mBaiduMap.addOverlay(option);
+				}
 			}
 			super.onPostExecute(result);
 		}

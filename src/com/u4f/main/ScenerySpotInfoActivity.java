@@ -1,20 +1,7 @@
 package com.u4f.main;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-import com.u4f.model.ScenerySpot;
-import com.u4f.model.ScenerySpotAdapter;
-import com.u4f.model.TravelNote;
-import com.u4f.model.TravelNoteAdapter;
-import com.u4f.util.MyImageLoader;
-import com.u4f.util.MyNetWorkUtil;
-import com.u4f.widget.NoScrollListview;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,14 +9,20 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.u4f.model.ScenerySpot;
+import com.u4f.model.TravelNote;
+import com.u4f.model.TravelNoteAdapter;
+import com.u4f.util.MyImageLoader;
+import com.u4f.util.MyNetWorkUtil;
+import com.u4f.widget.NoScrollListview;
 
 public class ScenerySpotInfoActivity extends Activity
 {
@@ -51,6 +44,7 @@ public class ScenerySpotInfoActivity extends Activity
 	TextView scenerySpotNameTicketTitleTextView;
 	TextView travleNoteSizeTextView;
 	ImageView scenerySpotPitcureImageView;
+	Button writeNoteButton;
 	
 	MyImageLoader  myImageloader;
 	@Override
@@ -123,6 +117,20 @@ public class ScenerySpotInfoActivity extends Activity
 					Intent gotoMapActivity = new Intent(ScenerySpotInfoActivity.this,ScenerySpotMapActivity.class);
 					gotoMapActivity.putExtra("ss", scenerySpot);
 					startActivity(gotoMapActivity);
+					
+				}
+			});
+			
+			writeNoteButton = (Button)findViewById(R.id.writeNoteButton);
+			writeNoteButton.setOnClickListener(new OnClickListener()
+			{
+				
+				@Override
+				public void onClick(View v)
+				{
+					Intent gotoUpTravelNoteActivity = new Intent(ScenerySpotInfoActivity.this,UpTravleNoteActivity.class);
+					gotoUpTravelNoteActivity.putExtra("ss", scenerySpot);
+					startActivity(gotoUpTravelNoteActivity);
 					
 				}
 			});
