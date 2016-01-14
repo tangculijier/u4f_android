@@ -68,11 +68,11 @@ public class TravelNoteAdapter extends ArrayAdapter<TravelNote>
 			List<String> travelPhotosUrl = TravelNote.getTravelPhotos();
 			if( travelPhotosUrl!= null && travelPhotosUrl.size() != 0 )
 			{
-				if(isAdd == false)
+				//if(isAdd == false)
 				{
 					for(String url : travelPhotosUrl)
 					{
-						//Log.d("huang", "travelPhotosUrl="+url);
+						//Log.d("huang", TravelNote.getUser().getUsername()+":travelPhotosUrl="+url);
 						ImageView image = new ImageView(ctx);
 						image.setScaleType(ScaleType.CENTER_CROP);
 						image.setLayoutParams(new LayoutParams(150, 150));

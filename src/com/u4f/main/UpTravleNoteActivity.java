@@ -187,13 +187,13 @@ public class UpTravleNoteActivity extends Activity
 		 	.add("travelNoteTitle", travelNoteEditText.getText().toString())
 		 	.add("travelNoteContent", travelNoteTitleEditText.getText().toString())
 		 	.build();
-			String postUrl ="UploadTravelNote";
+			String postUrl ="UploadTravelPhotos";
 			//res = MyNetWorkUtil.post(MyConst.BASE_URL+postUrl, formBody);
 			for(int i = 0 ;i < addPhotoFileList.size() ;i++)
 			{
 				File file = addPhotoFileList.get(i);
 				Log.d("huang", file.getAbsolutePath()+"");
-	            String resultUpPhtoto = UploadUtil.uploadFile(file, MyConst.BASE_URL+"UploadTravelNote");
+	            String resultUpPhtoto = UploadUtil.uploadFile(file, MyConst.BASE_URL+postUrl);
 	            Log.d("huang", "resultUpPhtoto="+resultUpPhtoto);
 	            if(TextUtils.equals(resultUpPhtoto, "true"))
 	            {

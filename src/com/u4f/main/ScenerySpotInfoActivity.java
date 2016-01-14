@@ -180,6 +180,10 @@ public class ScenerySpotInfoActivity extends Activity
 				List<TravelNote> cc =  com.alibaba.fastjson.JSON.parseArray(result, TravelNote.class);
 				if(cc!=null)
 				{
+					for(TravelNote x : cc)
+					{
+						Log.d("huang", x.getUser().getUsername()+"”√ªß,Õº∆¨="+x.getTravelPhotos().size());
+					}
 					travelNoteList.clear();
 					travelNoteList.addAll(cc);
 		
