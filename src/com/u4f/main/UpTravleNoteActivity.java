@@ -3,6 +3,7 @@ package com.u4f.main;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -35,6 +36,7 @@ import com.u4f.model.ScenerySpot;
 import com.u4f.model.TravelNote;
 import com.u4f.util.MyConst;
 import com.u4f.util.MyNetWorkUtil;
+import com.u4f.util.UoLoadUtil2;
 import com.u4f.util.UploadUtil;
 
 /**
@@ -192,13 +194,24 @@ public class UpTravleNoteActivity extends Activity
 			for(int i = 0 ;i < addPhotoFileList.size() ;i++)
 			{
 				File file = addPhotoFileList.get(i);
-				Log.d("huang", file.getAbsolutePath()+"");
-	            String resultUpPhtoto = UploadUtil.uploadFile(file, MyConst.BASE_URL+postUrl);
-	            Log.d("huang", "resultUpPhtoto="+resultUpPhtoto);
-	            if(TextUtils.equals(resultUpPhtoto, "true"))
-	            {
-	            	publishProgress(i+1);
-	            }
+				Log.d("huang","MyConst.BASE_URL+postUrl="+MyConst.BASE_URL+postUrl);
+	            //String resultUpPhtoto = UploadUtil.uploadFile(file, MyConst.BASE_URL+postUrl);
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("travelNoteId", "128");
+				 UoLoadUtil2.toUploadFile(file,"img", MyConst.BASE_URL+postUrl,map);
+				 try
+				{
+					UoLoadUtil2.post(file, MyConst.BASE_URL+postUrl, map);
+				} catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+//	            Log.d("huang", "resultUpPhtoto="+resultUpPhtoto);
+//	            if(TextUtils.equals(resultUpPhtoto, "true"))
+//	            {
+//	            	publishProgress(i+1);
+//	            }
 			}
 
 			return res;

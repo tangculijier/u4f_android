@@ -17,6 +17,15 @@
        android:layout_width="match_parent"
 	   android:layout_height="wrap_content"
 	   android:orientation="horizontal">
+	   
+	 <RadioButton
+        android:id="@+id/little_scenery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_weight="1"
+        android:checked="true"
+        android:text="景点" />
     <RadioButton
         android:id="@+id/radioButton_wc"
         android:layout_width="wrap_content"
