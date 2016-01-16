@@ -39,6 +39,8 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.model.LatLng;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.RequestBody;
 import com.u4f.InfoView.FacilitysWindow;
 import com.u4f.model.Facilitys;
 import com.u4f.model.Scenery;
@@ -74,7 +76,9 @@ public class ScenerySpotMapActivity extends Activity
 	ScenerySpot scenerySpot;
 	List<Facilitys> facilityList;
 	List<Scenery> littleSceneryList;
+	Scenery signSceneryTarget;
 	
+	Button signButton;
 	TextView scenerySpotNameTextView;
 	RadioGroup radioGroup;
 	RadioButton radio_wc_Button;
@@ -99,8 +103,10 @@ public class ScenerySpotMapActivity extends Activity
 		radio_food_Button= (RadioButton) findViewById(R.id.radioButton_food);
 		radio_shopping_Button= (RadioButton) findViewById(R.id.radioButton_shopping);
 		radio_little_scenery= (RadioButton) findViewById(R.id.little_scenery);
+		signButton = (Button) findViewById(R.id.signButton);
+		signButton.setVisibility(View.GONE);
+    	new getlittleSceneryInsideAsync().execute(scenerySpot.getScenerySpotId()+"");
 
-		
 		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener()
 		{
 			
@@ -186,6 +192,7 @@ public class ScenerySpotMapActivity extends Activity
 				{
 					//LogUtil.d("huang","arg0.getExtraInfo().getParcelable(content) instanceof Content");
 					final Facilitys f = arg0.getExtraInfo().getParcelable("facilitys");
+					signButton.setVisibility(View.GONE);
 					FacilitysWindow messageInfoWindow=new FacilitysWindow(getApplicationContext(),f.getFacilityName());
 					InfoWindow.OnInfoWindowClickListener listener = new InfoWindow.OnInfoWindowClickListener() {
 						public void onInfoWindowClick()
@@ -202,6 +209,9 @@ public class ScenerySpotMapActivity extends Activity
 				{
 					//LogUtil.d("huang","arg0.getExtraInfo().getParcelable(content) instanceof Content");
 					final Scenery littleScenery = arg0.getExtraInfo().getParcelable("scenery");
+					signSceneryTarget = littleScenery;
+					scenerySpotNameTextView.setText(signSceneryTarget.getSceneryName());
+					signButton.setVisibility(View.VISIBLE);
 					FacilitysWindow messageInfoWindow=new FacilitysWindow(getApplicationContext(),littleScenery.getSceneryName());
 					InfoWindow.OnInfoWindowClickListener listener = new InfoWindow.OnInfoWindowClickListener() {
 						public void onInfoWindowClick()
@@ -220,6 +230,17 @@ public class ScenerySpotMapActivity extends Activity
 				mBaiduMap.showInfoWindow(mInfoWindow);
 				return true;
 			}});
+		signButton.setOnClickListener(new OnClickListener()
+		{
+			
+			@Override
+			public void onClick(View v)
+			{
+				Log.d("huang", "签到"+signSceneryTarget.getSceneryId());
+				new signAsync().execute();
+				
+			}
+		});
 	}
 
 	private void initBaiduMap()
@@ -247,9 +268,9 @@ public class ScenerySpotMapActivity extends Activity
 	public void initScenerySpotlay() 
 	{
 
-		MarkerOptions ooA = new MarkerOptions().position(scenerySpotLatLng).icon(ss_bitmap)
-				.zIndex(9).draggable(true);
-		scenerySpotMarker = (Marker) (mBaiduMap.addOverlay(ooA));
+		//MarkerOptions ooA = new MarkerOptions().position(scenerySpotLatLng).icon(ss_bitmap)
+		//		.zIndex(9).draggable(true);
+		//scenerySpotMarker = (Marker) (mBaiduMap.addOverlay(ooA));
 	}
 	/**
 	 * 定位SDK监听函数
@@ -463,6 +484,64 @@ public class ScenerySpotMapActivity extends Activity
 		}
 		
 	}
+	
+	
+	class signAsync extends AsyncTask<String, Void, String>
+	{
+
+		@Override
+		protected String doInBackground(String... params)
+		{
+			String res ="";
+		
+			if(signSceneryTarget != null)
+			{
+				
+				String userId = "1";
+				String longtutide = "108.990058";
+				String latutide = "34.24745";
+				String sceneryId = signSceneryTarget.getSceneryId()+"";
+				RequestBody formBody = new FormEncodingBuilder()
+			 	.add("userId", "1")
+			 	.add("sceneryId",sceneryId)
+			 	.add("latitude", latutide)
+			 	.add("longtitude", longtutide)
+			 	.build();
+				String postUrl ="SignInServlet";
+				 res = MyNetWorkUtil.post(postUrl, formBody);
+			}
+			return res;
+		}
+		@Override
+		protected void onPostExecute(String result)
+		{
+			if(TextUtils.equals(result, "0"))
+			{
+				Toast.makeText(ScenerySpotMapActivity.this,"已签到过", Toast.LENGTH_SHORT).show();
+
+			}
+			else if(TextUtils.equals(result, "1"))
+			{
+				Toast.makeText(ScenerySpotMapActivity.this,"签到成功!", Toast.LENGTH_SHORT).show();
+
+			}
+			else if(TextUtils.equals(result, "2"))
+			{
+				Toast.makeText(ScenerySpotMapActivity.this,"签到失败!", Toast.LENGTH_SHORT).show();
+
+			}
+			else if(TextUtils.equals(result, "3"))
+			{
+				Toast.makeText(ScenerySpotMapActivity.this,"距离大于100m,签到失败!", Toast.LENGTH_SHORT).show();
+
+			}
+			super.onPostExecute(result);
+		}
+		
+	}
+	
+	
+	
 	@Override
 	protected void onPause()
 	{

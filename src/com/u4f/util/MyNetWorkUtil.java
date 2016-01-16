@@ -76,7 +76,7 @@ public class MyNetWorkUtil
 	 
 
 	  	Request request = new Request.Builder()
-	      .url(url)
+	      .url(MyConst.BASE_URL+url)
 	      .post(formBody)
 	      .build();
 
