@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.u4f.model.ScenerySpot;
 import com.u4f.model.TravelNote;
 import com.u4f.model.TravelNoteAdapter;
+import com.u4f.util.MyConst;
 import com.u4f.util.MyImageLoader;
 import com.u4f.util.MyNetWorkUtil;
 import com.u4f.widget.NoScrollListview;
@@ -63,7 +64,7 @@ public class ScenerySpotInfoActivity extends Activity
 			
 			Log.d("huang", "scenerySpot="+scenerySpot.toString());
 			
-			myImageloader.showImage("http://10.0.2.2:8080/u4f/"+scenerySpot.getScenerySpotPicture(), scenerySpotPitcureImageView);
+			myImageloader.showImage(MyConst.BASE_URL+scenerySpot.getScenerySpotPicture(), scenerySpotPitcureImageView);
 			
 			scenerySpotNameTextView.setText(scenerySpot.getScenerySpotName());
 			scenerySpotNameAddressTextView.setText(scenerySpot.getScenerySpotAddress());

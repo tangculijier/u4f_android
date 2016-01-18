@@ -3,8 +3,8 @@
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
         <item >首页</item>
-        <item >图纹豆</item>
-        <item >添加留言墙</item>
+        <item >积分</item>
+        <item >足迹图</item>
 		<item >意见反馈</item>
 		<item >设置</item>
     </string-array>

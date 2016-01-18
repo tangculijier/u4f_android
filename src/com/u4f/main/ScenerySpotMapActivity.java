@@ -294,7 +294,8 @@ public class ScenerySpotMapActivity extends Activity
 //					.longitude(scenerySpot.getScenerySpotLong()).build();
 //			mBaiduMap.setMyLocationData(locData);
 			if (isFirstLoc)
-			{	Log.d("huang", "isFirstLoc");
+			{	
+				Log.d("huang", "isFirstLoc");
 				isFirstLoc = false;
 				LatLng ll = new LatLng(scenerySpot.getScenerySpotLat(),
 						scenerySpot.getScenerySpotLong());
@@ -496,7 +497,6 @@ public class ScenerySpotMapActivity extends Activity
 		
 			if(signSceneryTarget != null)
 			{
-				
 				String userId = "1";
 				String longtutide = "108.990058";
 				String latutide = "34.24745";
@@ -508,7 +508,7 @@ public class ScenerySpotMapActivity extends Activity
 			 	.add("longtitude", longtutide)
 			 	.build();
 				String postUrl ="SignInServlet";
-				 res = MyNetWorkUtil.post(postUrl, formBody);
+				res = MyNetWorkUtil.post(postUrl, formBody);
 			}
 			return res;
 		}

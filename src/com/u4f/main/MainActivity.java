@@ -183,7 +183,7 @@ public class MainActivity extends ActionBarActivity
 			// Home
 		    mDrawerItemList = new ArrayList<DrawerItem>();
 			mDrawerItemList.add(new DrawerItem(mMenuTitles[0], mMenuIconArray.getResourceId(0, -1)));
-			mDrawerItemList.add(new DrawerItem(mMenuTitles[1], mMenuIconArray.getResourceId(1, -1), true, "0"));
+			mDrawerItemList.add(new DrawerItem(mMenuTitles[1], mMenuIconArray.getResourceId(1, -1), true, "120"));
 			mDrawerItemList.add(new DrawerItem(mMenuTitles[2], mMenuIconArray.getResourceId(2, -1)));
 			mDrawerItemList.add(new DrawerItem(mMenuTitles[3], mMenuIconArray.getResourceId(3, -1)));
 			mDrawerItemList.add(new DrawerItem(mMenuTitles[4], mMenuIconArray.getResourceId(4, -1)));
@@ -294,7 +294,9 @@ public class MainActivity extends ActionBarActivity
 			 case 2:
 		 			break;
 			 case 3:
-				 	targetFragment = new HomeFragment();
+				 	//targetFragment = new HomeFragment();
+				 	Intent gotomymarkpalceIntent = new Intent(MainActivity.this,MyMarkPlaceListActivity.class);
+				 	startActivity(gotomymarkpalceIntent);
 		 			break;
 			 case 4:
 				 targetFragment = new HomeFragment();

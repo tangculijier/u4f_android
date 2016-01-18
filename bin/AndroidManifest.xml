@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
@@ -94,6 +94,14 @@
         <activity
             android:name=".UpTravleNoteActivity"
             android:label="@string/title_activity_up_travle_note" >
+        </activity>
+        <activity
+            android:name=".MyMarkPlaceListActivity"
+            android:label="@string/title_activity_my_mark_place_list" >
+        </activity>
+        <activity
+            android:name=".FootActivity"
+            >
         </activity>
     </application>
 
