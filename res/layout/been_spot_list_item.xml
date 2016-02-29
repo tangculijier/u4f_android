@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content" 
+	android:orientation="horizontal"
+	android:padding="5dp">
+	<ImageView
+		android:id="@+id/been_Picture_imageview"
+		android:layout_width="60dp"
+		android:layout_height="match_parent" 
+		android:src="@drawable/ic_launcher"
+		android:scaleType="centerCrop"
+		android:padding="5dp"
+		/>
+
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	    android:orientation="vertical">
+	
+	  <LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	    android:orientation="horizontal">
+
+	<TextView
+		android:id="@+id/been_name_textview"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="兴庆公园"
+		android:textStyle="bold"
+		android:padding="5dp"/>
+	</LinearLayout>
+	
+	   <RelativeLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	    android:orientation="horizontal">
+	<TextView
+		android:id="@+id/been_signtimes_textview"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="共签到 %s次" 
+		android:padding="5dp"
+		/>
+	<TextView
+		android:id="@+id/been_time_textview"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="2015-06-21"
+		android:layout_alignParentRight="true"
+		android:padding="5dp" />
+	</RelativeLayout>
+	
+	</LinearLayout>
+</LinearLayout>

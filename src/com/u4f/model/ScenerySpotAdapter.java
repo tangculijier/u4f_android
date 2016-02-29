@@ -13,6 +13,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.u4f.main.R;
 import com.u4f.main.R.drawable;
 import com.u4f.main.R.id;
+import com.u4f.util.MyConst;
 import com.u4f.util.MyImageLoader;
 
 
@@ -52,7 +53,7 @@ public class ScenerySpotAdapter extends ArrayAdapter<ScenerySpot>
 		}
 			if(scenerySpot.getScenerySpotPicture() != null )
 			{
-				myImageloader.showImage("http://10.0.2.2:8080/u4f/"+scenerySpot.getScenerySpotPicture(), viewHolder.scenerySpotPicture);
+				myImageloader.showImage(MyConst.BASE_URL+scenerySpot.getScenerySpotPicture(), viewHolder.scenerySpotPicture);
 
 			}
 			else

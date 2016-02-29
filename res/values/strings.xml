@@ -12,5 +12,6 @@
     <string name="title_activity_scenery">SceneryActivity</string>
     <string name="title_activity_scenery_spot_map">景点信息</string>
     <string name="title_activity_up_travle_note">上传攻略</string>
+    <string name="title_activity_my_mark_place_list">我签到过的景点</string>
 
 </resources>
